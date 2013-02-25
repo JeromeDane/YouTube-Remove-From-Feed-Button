@@ -1,4 +1,4 @@
-Mute Button for Google+
+Remove from Feed Button for YouTube
 =====================
 
 This simple extension injects mute buttons into posts on Google+ (Google Plus) so 
@@ -14,7 +14,7 @@ For updates on this and other projects, follow me on one of the following sites:
 [Facebook](https://www.facebook.com/Dane.Jerome) |
 [Twitter](https://twitter.com/JeromeDane)
 
-Note: The round "Mute" icon in this extension's icon is by [Black Bear Blanc](http://icondatabase.net/icons/black-bear-blanc/dark-buttons-2/dark-buttons-2-deviceaccessvolumemuted-icon). 
+Note: The round "Delete" icon in this extension's icon is by [Black Bear Blanc](http://icondatabase.net/icons/black-bear-blanc/dark-buttons-2/dark-buttons-2-deviceaccessvolumemuted-icon). 
 
 License 
 ==========
@@ -24,5 +24,5 @@ License
 You can share or modify this work as long as you:
 
 1. Link back to this page
-2. Ddon't use this or derivatives of this for commercial use
+2. Don't use this or derivatives of this for commercial use
 3. Share your changes so that others can benifit from your improvements. 
