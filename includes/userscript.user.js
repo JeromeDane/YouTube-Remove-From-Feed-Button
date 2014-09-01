@@ -2,13 +2,10 @@
 // @name           Google+ Tweaks
 // @description    Tweaks to the layout and features of Google+
 // @author         Jerome Dane
-// @website        http://userscripts.org/scripts/show/106166
-// @version        1.1157
-//
-// @updateURL      https://userscripts.org/scripts/source/106166.meta.js
+// @website        https://chrome.google.com/webstore/detail/remove-from-feed-for-yout/ogclfblkiagkkfpdbbbphchgfkieecml
 // 
-// @include        http://plus.google.com/*
-// @include        https://plus.google.com/*
+// @include        http://www.youtube.com/feed/*
+// @include        https://www.youtube.com/feed/*
 //
 // ==/UserScript==
 
@@ -35,16 +32,16 @@
 
 function simulateClick(element) {
     var clickEvent;
-    clickEvent = document.createEvent("MouseEvents")
-    clickEvent.initEvent("mousedown", true, true)
+    clickEvent = document.createEvent("MouseEvents");
+    clickEvent.initEvent("mousedown", true, true);
     element.dispatchEvent(clickEvent);
     
-    clickEvent = document.createEvent("MouseEvents")
-    clickEvent.initEvent("click", true, true)
+    clickEvent = document.createEvent("MouseEvents");
+    clickEvent.initEvent("click", true, true);
     element.dispatchEvent(clickEvent);
     
-    clickEvent = document.createEvent("MouseEvents")
-    clickEvent.initEvent("mouseup", true, true)
+    clickEvent = document.createEvent("MouseEvents");
+    clickEvent.initEvent("mouseup", true, true);
     element.dispatchEvent(clickEvent);
 }
 
@@ -61,7 +58,8 @@ $('head').append('<style type="text/css">' +
 	'</style>');
 
 function getRemoveTrigger(postElem) {
-	var removeTrigger = $('.yt-uix-button-menu li:first span:first', postElem);
+//	var removeTrigger = $('.yt-uix-button-menu li:first span:first', postElem);
+	var removeTrigger = $('.dismiss-menu-choice', postElem);
 	if(removeTrigger.size() == 1) {
 		return removeTrigger;	
 	}
@@ -72,6 +70,7 @@ function getRemoveTrigger(postElem) {
 function removePost(postElem) {
 	var removeTrigger = getRemoveTrigger(postElem);
 	simulateClick(removeTrigger[0]);
+	postElem.remove();
 }
 
 function injectButton(postElem) {
@@ -100,7 +99,7 @@ function injectButtonsIntoPosts() {
 }
 injectButtonsIntoPosts();
 
-var feedItemSelector = '#feed .feed-item-container';
+var feedItemSelector = '#browse-items-primary .feed-item-container';
 
 // trigger re-checking all posts when any new post is first moused over 
 $(feedItemSelector).live('mouseover', function() {
