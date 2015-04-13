@@ -71,6 +71,13 @@ function removePost(postElem) {
 	var removeTrigger = getRemoveTrigger(postElem);
 	simulateClick(removeTrigger[0]);
 	postElem.remove();
+	// hack to auto load images for vids as they come into view
+	var x = window.scrollX;
+	var y = window.scrollY;
+	window.scroll(x,y+1);
+	setTimeout(function() {
+		window.scroll(x,y);
+	},50);
 }
 
 function injectButton(postElem) {
