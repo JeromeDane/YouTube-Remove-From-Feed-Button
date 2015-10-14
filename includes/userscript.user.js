@@ -83,7 +83,6 @@ function RemoveFeedFromYouTube() {
 		},50);
 	}
 	
-
 	function removePost(postElem) {
 		var removeTrigger = getRemoveTrigger(postElem);
 		simulateClick(removeTrigger);
