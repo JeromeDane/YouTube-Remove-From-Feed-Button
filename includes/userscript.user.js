@@ -51,7 +51,7 @@ $('head').append('<style type="text/css">' +
 	'.bcRemoveButton {' +
 		'cursor:pointer;' +
 		'opacity:.45;' +
-		'position:absolute; top:10px; right:30px; display:none;' +
+		'position:absolute; top:3px; right:30px; display:none;' +
 	'}' +
 	'.feed-item-container:hover .bcRemoveButton { display:block; }' +
 	'.bcRemoveButton:hover { opacity:.6; }' +
