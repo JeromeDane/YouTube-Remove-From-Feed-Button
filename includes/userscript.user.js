@@ -52,7 +52,7 @@ style.innerHTML = '.feed-item-dismissal-notices { display:none; }' + // hide rem
 	'.bcRemoveButton {' +
 		'cursor:pointer;' +
 		'opacity:.45;' +
-		'position:absolute; top:3px; right:30px; display:none;' +
+		'position:absolute; top:0; right:30px; display:none; padding:3px' +
 	'}' +
 	'.feed-item-container:hover .bcRemoveButton { display:block; }' +
 	'.bcRemoveButton:hover { opacity:.6; }';
