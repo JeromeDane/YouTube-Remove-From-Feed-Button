@@ -35,7 +35,6 @@
 // configuration variables
 var feedItemSelector = '#browse-items-primary .feed-item-container';
 
-
 function simulateClick(element) {
 	
     var clickEvent;
@@ -53,17 +52,19 @@ function simulateClick(element) {
 }
 
 // inject styles
-var style = document.createElement('style');
-style.type = 'text/css';
-style.innerHTML = '.feed-item-dismissal-notices { display:none; }' + // hide removed from feed notices 
-	'.bcRemoveButton {' +
-		'cursor:pointer;' +
-		'opacity:.45;' +
-		'position:absolute; top:0; right:30px; display:none; padding:3px' +
-	'}' +
-	'.feed-item-container:hover .bcRemoveButton { display:block; }' +
-	'.bcRemoveButton:hover { opacity:.6; }';
-document.getElementsByTagName('head')[0].appendChild(style);
+function injectStyle() {
+	var style = document.createElement('style');
+	style.type = 'text/css';
+	style.innerHTML = '.feed-item-dismissal-notices { display:none; }' + // hide removed from feed notices 
+		'.bcRemoveButton {' +
+			'cursor:pointer;' +
+			'opacity:.45;' +
+			'position:absolute; top:0; right:30px; display:none; padding:3px' +
+		'}' +
+		'.feed-item-container:hover .bcRemoveButton { display:block; }' +
+		'.bcRemoveButton:hover { opacity:.6; }';
+	document.getElementsByTagName('head')[0].appendChild(style);
+}
 
 function getRemoveTrigger(postElem) {
 	var removeTrigger = postElem.querySelector('.dismiss-menu-choice');
@@ -82,7 +83,6 @@ function removePost(postElem) {
 		window.scroll(x,y);
 	},50);
 }
-
 
 // create a new button element in the document
 function createNewButtonElement() {
@@ -117,6 +117,8 @@ function injectButtonsIntoPosts() {
 		injectButton(videoElements[i]);
 	}
 }
+
+injectStyle();
 injectButtonsIntoPosts();
 
 // trigger re-checking all posts when any new post is first moused over 
