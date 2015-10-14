@@ -46,16 +46,17 @@ function simulateClick(element) {
 }
 
 // inject styles
-$('head').append('<style type="text/css">' +
-	'.feed-item-dismissal-notices { display:none; }' + // hide removed from feed notices 
+var style = document.createElement('style');
+style.type = 'text/css';
+style.innerHTML = '.feed-item-dismissal-notices { display:none; }' + // hide removed from feed notices 
 	'.bcRemoveButton {' +
 		'cursor:pointer;' +
 		'opacity:.45;' +
 		'position:absolute; top:3px; right:30px; display:none;' +
 	'}' +
 	'.feed-item-container:hover .bcRemoveButton { display:block; }' +
-	'.bcRemoveButton:hover { opacity:.6; }' +
-	'</style>');
+	'.bcRemoveButton:hover { opacity:.6; }';
+document.getElementsByTagName('head')[0].appendChild(style);
 
 function getRemoveTrigger(postElem) {
 //	var removeTrigger = $('.yt-uix-button-menu li:first span:first', postElem);
