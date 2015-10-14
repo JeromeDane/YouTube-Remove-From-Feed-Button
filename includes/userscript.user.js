@@ -32,6 +32,10 @@
 // CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 // OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// configuration variables
+var feedItemSelector = '#browse-items-primary .feed-item-container';
+
+
 function simulateClick(element) {
     var clickEvent;
     clickEvent = document.createEvent("MouseEvents");
@@ -63,7 +67,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 function getRemoveTrigger(postElem) {
 //	var removeTrigger = $('.yt-uix-button-menu li:first span:first', postElem);
 	var removeTrigger = $('.dismiss-menu-choice', postElem);
-	if(removeTrigger.size() == 1) {
+	if(removeTrigger.size() === 1) {
 		return removeTrigger;	
 	}
 	return false;
@@ -82,33 +86,41 @@ function removePost(postElem) {
 	},50);
 }
 
+
+// create a new button element in the document
+function createNewButtonElement() {
+	var src = chrome.extension.getURL('images/close_16_r8.png');
+	var button = document.createElement('img');
+	button.src = src;
+	button.className = 'bcRemoveButton';
+	button.title = "Remove this item from your subscription feed";
+	return button;
+}
+
+// inject a remove button into a post
 function injectButton(postElem) {
-	
 	if(!postElem.className.match(/buttonEnabled/)) {
 		postElem.className += ' buttonEnabled';
 		var removeTrigger = getRemoveTrigger(postElem);
 		if(removeTrigger) {
-			var src = chrome.extension.getURL('images/close_16_r8.png');
-			$('.feed-item-action-menu', postElem).before('<img src="' + src + '" class="bcRemoveButton" title="Remove this item from your subscription feed"/>');
-			$('.bcRemoveButton', postElem).click(function() {
+			var actionMenuElem = postElem.querySelector('.feed-item-action-menu');
+			var button = createNewButtonElement();
+			actionMenuElem.parentNode.insertBefore(button, actionMenuElem);
+			button.onclick = function() {
 				removePost(postElem);
-			});
+			};
 		}
-		//console.log(removeTrigger);
-		
 	}
-	
 };
 
+// draw mute button for existing posts
 function injectButtonsIntoPosts() {
-	// draw mute button for existing posts
-	$(feedItemSelector).each(function() {
-		injectButton(this);
-	});
+	var videoElements = document.querySelectorAll(feedItemSelector);
+	for(var i = 0; i < videoElements.length; i++) {
+		injectButton(videoElements[i]);
+	}
 }
 injectButtonsIntoPosts();
-
-var feedItemSelector = '#browse-items-primary .feed-item-container';
 
 // trigger re-checking all posts when any new post is first moused over 
 $(feedItemSelector).live('mouseover', function() {
