@@ -73,17 +73,22 @@ function RemoveFeedFromYouTube() {
 		return removeTrigger;
 	}
 
-	function removePost(postElem) {
-		var removeTrigger = getRemoveTrigger(postElem);
-		simulateClick(removeTrigger);
-		postElem.remove();
-		// hack to auto load images for vids as they come into view
+	// hack to auto load images for vids as they come into view
+	function triggerAutoLoad() {
 		var x = window.scrollX;
 		var y = window.scrollY;
 		window.scroll(x,y+1);
 		setTimeout(function() {
 			window.scroll(x,y);
 		},50);
+	}
+	
+
+	function removePost(postElem) {
+		var removeTrigger = getRemoveTrigger(postElem);
+		simulateClick(removeTrigger);
+		postElem.remove();
+		triggerAutoLoad();
 	}
 
 	// create a new button element in the document
