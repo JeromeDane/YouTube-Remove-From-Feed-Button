@@ -120,9 +120,6 @@ function RemoveFeedFromYouTube() {
 		}
 	}
 
-	injectStyle();
-	injectButtonsIntoPosts();
-
 	// trigger re-checking all posts when any new post is first moused over 
 	$(feedItemSelector).live('mouseover', function() {
 		injectButtonsIntoPosts();
@@ -138,6 +135,15 @@ function RemoveFeedFromYouTube() {
 			}
 		});
 	});
+	
+	function init() {
+		injectStyle();
+		injectButtonsIntoPosts();
+	}
+	
+	return {
+		init: init
+	};
 }
 
-new RemoveFeedFromYouTube();
+(new RemoveFeedFromYouTube()).init();
