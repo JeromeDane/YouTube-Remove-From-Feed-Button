@@ -10,7 +10,7 @@
 		"48": "images/icon_48.png",
 		"128": "images/icon_128.png"
 	},
-	"web_accessible_resources":["close_16_r8.png"],
+	"web_accessible_resources":["images/close_16_r8.png"],
 	"content_scripts": [
 		{
 			"js": ["includes/jquery.js", "includes/userscript.user.js"],

@@ -85,7 +85,7 @@ function injectButton(postElem) {
 		postElem.className += ' buttonEnabled';
 		var removeTrigger = getRemoveTrigger(postElem);
 		if(removeTrigger) {
-			var src = chrome.extension.getURL('close_16_r8.png');
+			var src = chrome.extension.getURL('images/close_16_r8.png');
 			$('.feed-item-action-menu', postElem).before('<img src="' + src + '" class="bcRemoveButton" title="Remove from your feed"/>');
 			$('.bcRemoveButton', postElem).click(function() {
 				removePost(postElem);
