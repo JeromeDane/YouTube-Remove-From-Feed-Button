@@ -1,11 +1,13 @@
 // ==UserScript==
-// @name           Google+ Tweaks
-// @description    Tweaks to the layout and features of Google+
-// @author         Jerome Dane
+// @name           Remove From Feed for YouTube
+// @description    Easily remove items from your YouTube subscription feed with a single click
+// @author         Jerome Dane <jeromedane.com>
 // @website        https://chrome.google.com/webstore/detail/remove-from-feed-for-yout/ogclfblkiagkkfpdbbbphchgfkieecml
 // 
 // @include        http://www.youtube.com/feed/*
 // @include        https://www.youtube.com/feed/*
+// 
+// Please report any bugs or issues to https://github.com/JeromeDane/YouTube-Remove-From-Feed-Button/issues
 //
 // ==/UserScript==
 

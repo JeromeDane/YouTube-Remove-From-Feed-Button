@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Remove From Feed for YouTube",
-	"description": "Buttons to one-click remove videos from your YouTube subscription feed or remove all watched wideos. Please report any issues to https://github.com/JeromeDane/YouTube-Remove-From-Feed-Button/issues",
+	"description": "Easily remove items from your YouTube subscription feed with a single click. Please report any issues to https://github.com/JeromeDane/YouTube-Remove-From-Feed-Button/issues",
 	"version": "0.0.4",
 	"options_page": "options.html",
 	"permissions": ["http://www.youtube.com/*", "https://www.youtube.com/*"],
