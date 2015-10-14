@@ -37,6 +37,7 @@ var feedItemSelector = '#browse-items-primary .feed-item-container';
 
 
 function simulateClick(element) {
+	
     var clickEvent;
     clickEvent = document.createEvent("MouseEvents");
     clickEvent.initEvent("mousedown", true, true);
@@ -65,17 +66,13 @@ style.innerHTML = '.feed-item-dismissal-notices { display:none; }' + // hide rem
 document.getElementsByTagName('head')[0].appendChild(style);
 
 function getRemoveTrigger(postElem) {
-//	var removeTrigger = $('.yt-uix-button-menu li:first span:first', postElem);
-	var removeTrigger = $('.dismiss-menu-choice', postElem);
-	if(removeTrigger.size() === 1) {
-		return removeTrigger;	
-	}
-	return false;
+	var removeTrigger = postElem.querySelector('.dismiss-menu-choice');
+	return removeTrigger;
 }
 
 function removePost(postElem) {
 	var removeTrigger = getRemoveTrigger(postElem);
-	simulateClick(removeTrigger[0]);
+	simulateClick(removeTrigger);
 	postElem.remove();
 	// hack to auto load images for vids as they come into view
 	var x = window.scrollX;
