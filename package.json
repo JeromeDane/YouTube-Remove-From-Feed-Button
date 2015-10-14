@@ -1,0 +1,26 @@
+{
+  "name": "remove-from-feed-button-for-youtube",
+  "version": "0.0.4",
+  "description": "Easily remove items from your YouTube subscription feed with a single click",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JeromeDane/YouTube-Remove-From-Feed-Button.git"
+  },
+  "keywords": [
+    "youtube",
+    "remove",
+    "feed",
+    "chrome",
+    "extension"
+  ],
+  "author": "Jerome Dane <jeromedane.com>",
+  "license": "Creative Commons Attribution 3.0 Unported",
+  "bugs": {
+    "url": "https://github.com/JeromeDane/YouTube-Remove-From-Feed-Button/issues"
+  },
+  "homepage": "https://github.com/JeromeDane/YouTube-Remove-From-Feed-Button"
+}
