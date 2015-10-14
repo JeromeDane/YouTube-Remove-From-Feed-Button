@@ -4,7 +4,7 @@ Remove from Feed Button for YouTube
 This simple extension injects mute buttons into posts on Google+ (Google Plus) so 
 you can easily mute posts with a single click.
 
-[Install for Chrome](http://goo.gl/SfmWb)
+[Install for Chrome](https://chrome.google.com/webstore/detail/remove-from-feed-for-yout/ogclfblkiagkkfpdbbbphchgfkieecml)
 
 If you like this extension, you can always **[buy me a cup of coffee](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KF2QJ87Q37PFJ)**.
 
