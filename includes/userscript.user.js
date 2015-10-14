@@ -64,7 +64,6 @@ function getRemoveTrigger(postElem) {
 		return removeTrigger;	
 	}
 	return false;
-			
 }
 
 function removePost(postElem) {
