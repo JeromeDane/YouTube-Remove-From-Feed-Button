@@ -1,10 +1,10 @@
 {
 	"manifest_version": 2,
-	"name": "Remove From Feed for YouTube",
-	"description": "Easily remove items from your YouTube subscription feed with a single click. Please report any issues to https://github.com/JeromeDane/YouTube-Remove-From-Feed-Button/issues",
-	"version": "0.0.4",
+	"name": "<%= fullName %>",
+	"description": "<%= description %>",
+	"version": "<%= version %>",
 	"options_page": "options.html",
-	"permissions": ["http://www.youtube.com/*", "https://www.youtube.com/*"],
+	"permissions": ["http://www.youtube.com/feed/subscriptions*", "https://www.youtube.com/feed/subscriptions*"],
 	"icons": {
 		"16": "images/icon_16.png",
 		"48": "images/icon_48.png",
