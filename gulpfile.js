@@ -52,7 +52,7 @@ gulp.task('dist-chrome-pre', ['build-chrome'], function(callback) {
 gulp.task('dist-chrome', ['dist-chrome-pre'], function(callback) {
 	
 	// compress chrome build into a distribution zip
-	gulp.src('build/chrome/temp/*')
+	gulp.src('build/chrome/temp/**')
         .pipe(zip('chrome-extension-v' + getPackageDetails().version + '.zip'))
         .pipe(gulp.dest('dist'));
 
