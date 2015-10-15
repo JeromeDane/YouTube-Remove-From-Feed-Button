@@ -28,8 +28,8 @@ gulp.task('default', ['dist-chrome'], function(callback) {
 
 });
 
-// publish distribution for Chrome
-gulp.task('dist-chrome', ['build-chrome'], function(callback) {
+// pre-copy and minify chrome distribution files before zipping them
+gulp.task('dist-chrome-pre', ['build-chrome'], function(callback) {
 	
 	// copy files to temporary directory
 	gulp.src('./build/chrome/*.*').pipe(gulp.dest('./build/chrome/temp'));
@@ -44,15 +44,18 @@ gulp.task('dist-chrome', ['build-chrome'], function(callback) {
 		  fileName: 'build/chrome/temp/userscript.user.js'
 		}));
 	
+	callback();
+	
+});
+
+// publish distribution for Chrome
+gulp.task('dist-chrome', ['dist-chrome-pre'], function(callback) {
+	
 	// compress chrome build into a distribution zip
 	gulp.src('build/chrome/temp/*')
         .pipe(zip('chrome-extension-v' + getPackageDetails().version + '.zip'))
         .pipe(gulp.dest('dist'));
 
-	gulp.src('./**/*.js', { read: false }) // much faster 
-		.pipe(ignore('build/chrome/temp/**'))
-		.pipe(rimraf());
-	
 	callback();
 });
 
