@@ -1,37 +1,3 @@
-// ==UserScript==
-// @name           Remove From Feed for YouTube
-// @description    Easily remove items from your YouTube subscription feed with a single click
-// @author         Jerome Dane <jeromedane.com>
-// @website        https://chrome.google.com/webstore/detail/remove-from-feed-for-yout/ogclfblkiagkkfpdbbbphchgfkieecml
-// 
-// @include        http://www.youtube.com/feed/*
-// @include        https://www.youtube.com/feed/*
-// 
-// Please report any bugs or issues to https://github.com/JeromeDane/YouTube-Remove-From-Feed-Button/issues
-//
-// ==/UserScript==
-
-// License         Creative Commons Attribution 3.0 Unported License http://creativecommons.org/licenses/by/3.0/
-//
-// Copyright (c) 2012 Jerome Dane
-//
-// Permission is hereby granted, free of charge, to any person obtaining 
-// a copy of this software and associated documentation files (the "Software"), 
-// to deal in the Software without restriction, including without limitation the 
-// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or 
-// sell copies of the Software, and to permit persons to whom the Software is 
-// furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all 
-// copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
-// PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
-// HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
-// OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 function RemoveFeedFromYouTube() {
 	
 	// configuration variables
@@ -92,7 +58,7 @@ function RemoveFeedFromYouTube() {
 
 	// create a new button element in the document
 	function createNewButtonElement() {
-		var src = chrome.extension.getURL('images/close_16_r8.png');
+		var src = require('./images/close_16_r8.png');
 		var button = document.createElement('img');
 		button.src = src;
 		button.className = 'bcRemoveButton';
@@ -124,6 +90,7 @@ function RemoveFeedFromYouTube() {
 		}
 	}
 
+/*
 	// trigger re-checking all posts when any new post is first moused over 
 	$(feedItemSelector).live('mouseover', function() {
 		injectButtonsIntoPosts();
@@ -139,10 +106,12 @@ function RemoveFeedFromYouTube() {
 			}
 		});
 	});
+*/
 	
 	function init() {
 		injectStyle();
 		injectButtonsIntoPosts();
+		console.log('Remove from feed for YouTube successfully initialized');
 	}
 	
 	return {
@@ -150,4 +119,4 @@ function RemoveFeedFromYouTube() {
 	};
 }
 
-(new RemoveFeedFromYouTube()).init();
+module.exports = RemoveFeedFromYouTube;

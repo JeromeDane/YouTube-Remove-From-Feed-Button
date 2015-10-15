@@ -1,0 +1,21 @@
+{
+	"manifest_version": 2,
+	"name": "<%= fullName %>",
+	"description": "<%= description %>",
+	"version": "<%= version %>",
+	"options_page": "options.html",
+	"permissions": ["http://www.youtube.com/feed/subscriptions*", "https://www.youtube.com/feed/subscriptions*"],
+	"icons": {
+		"16": "images/icon_16.png",
+		"48": "images/icon_48.png",
+		"128": "images/icon_128.png"
+	},
+	"web_accessible_resources":["images/close_16_r8.png"],
+	"content_scripts": [
+		{
+			"js": ["userscript.user.js"],
+			"matches": ["http://www.youtube.com/*", "https://www.youtube.com/*"],
+			"run_at": "document_end"
+		}
+	]
+}
