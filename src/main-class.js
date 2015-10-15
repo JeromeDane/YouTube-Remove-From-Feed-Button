@@ -1,7 +1,10 @@
 function RemoveFeedFromYouTube() {
 	
 	// configuration variables
-	var feedItemSelector = '#browse-items-primary .feed-item-container';
+	var removeButtonClass = 'bcRemoveButton';
+	var feedItemContainerClass = 'feed-item-container';
+	var feedWrapperSelector = '#browse-items-primary > ol';
+	var feedItemSelector = feedWrapperSelector + ' .' + feedItemContainerClass;
 
 	function simulateClick(element) {
 
@@ -61,7 +64,7 @@ function RemoveFeedFromYouTube() {
 		var src = require('./images/close_16_r8.png');
 		var button = document.createElement('img');
 		button.src = src;
-		button.className = 'bcRemoveButton';
+		button.className = removeButtonClass;
 		button.title = "Remove this item from your subscription feed";
 		return button;
 	}
@@ -90,12 +93,36 @@ function RemoveFeedFromYouTube() {
 		}
 	}
 
-/*
-	// trigger re-checking all posts when any new post is first moused over 
-	$(feedItemSelector).live('mouseover', function() {
-		injectButtonsIntoPosts();
-	});
 
+	// listen for new videos in the DOM and add the remove button as necessary
+	function listenForNewVideos() {
+		
+		var target = document.querySelector(feedWrapperSelector);
+
+		// create an observer instance
+		var observer = new MutationObserver(function(mutations) {
+			mutations.forEach(function(mutation) {
+				for(var i = 0; i < mutation.addedNodes.length; i++) {
+					var  node = mutation.addedNodes[i];
+					if(node.querySelector) {
+						var item = node.querySelector('.' + feedItemContainerClass);
+						if(item) {
+							injectButton(item);
+						}
+					}
+				}
+			});
+		});
+		
+		// configuration of the observer:
+		var config = { attributes: true, childList: true, characterData: true }
+
+		// pass in the target node, as well as the observer options
+		observer.observe(target, config);
+		
+	}
+
+/*
 	// remove all watched button
 	$('.feed-header .feed-manage-link').after('<a id="bcRemoveAll" class="yt-uix-button  feed-manage-link secondary-nav yt-uix-sessionlink yt-uix-button-epic-nav-item">Remove All Watched</a>');
 	$('#bcRemoveAll').click(function() {
@@ -111,6 +138,7 @@ function RemoveFeedFromYouTube() {
 	function init() {
 		injectStyle();
 		injectButtonsIntoPosts();
+		listenForNewVideos();
 		console.log('Remove from feed for YouTube successfully initialized');
 	}
 	
