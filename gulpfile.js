@@ -29,7 +29,7 @@ gulp.task('default', ['dist-chrome'], function(callback) {
 gulp.task('dist-chrome', ['build-chrome'], function(callback) {
 	// compress chrome build into a distribution zip
 	return gulp.src('build/chrome/*')
-        .pipe(zip('chrome-extension.zip'))
+        .pipe(zip('chrome-extension-v' + getPackageDetails().version + '.zip'))
         .pipe(gulp.dest('dist'));
 });
 
