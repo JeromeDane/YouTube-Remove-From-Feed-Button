@@ -46,9 +46,11 @@ gulp.task('build-chrome', function(callback) {
 		},
 		module: {
 			loaders: [
-				{test: /\.png$/, loader: "url-loader?mimetype=image/png"}
+				{test: /\.png$/, loader: "url-loader?mimetype=image/png"},
+				{test: /\.css$/, loader: 'style!css' }
 			]
-		}
+		},
+		devtool: 'inline-source-map'
 	}, function(err, stats) {
 		if(err)
 			throw new gutil.PluginError("webpack", err);

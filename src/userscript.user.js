@@ -1,4 +1,4 @@
-var click = require('simulate-click-js');
+require('./style.css');
 
 var RemoveFeedFromYouTube = require('./main-class');
 

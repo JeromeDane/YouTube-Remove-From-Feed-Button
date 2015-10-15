@@ -1,3 +1,5 @@
+var click = require('simulate-click-js');
+
 function RemoveFeedFromYouTube() {
 	
 	// configuration variables
@@ -5,37 +7,6 @@ function RemoveFeedFromYouTube() {
 	var feedItemContainerClass = 'feed-item-container';
 	var feedWrapperSelector = '#browse-items-primary > ol';
 	var feedItemSelector = feedWrapperSelector + ' .' + feedItemContainerClass;
-
-	function simulateClick(element) {
-
-		var clickEvent;
-		clickEvent = document.createEvent("MouseEvents");
-		clickEvent.initEvent("mousedown", true, true);
-		element.dispatchEvent(clickEvent);
-
-		clickEvent = document.createEvent("MouseEvents");
-		clickEvent.initEvent("click", true, true);
-		element.dispatchEvent(clickEvent);
-
-		clickEvent = document.createEvent("MouseEvents");
-		clickEvent.initEvent("mouseup", true, true);
-		element.dispatchEvent(clickEvent);
-	}
-
-	// inject styles
-	function injectStyle() {
-		var style = document.createElement('style');
-		style.type = 'text/css';
-		style.innerHTML = '.feed-item-dismissal-notices { display:none; }' + // hide removed from feed notices 
-			'.bcRemoveButton {' +
-				'cursor:pointer;' +
-				'opacity:.45;' +
-				'position:absolute; top:0; right:30px; display:none; padding:3px' +
-			'}' +
-			'.feed-item-container:hover .bcRemoveButton { display:block; }' +
-			'.bcRemoveButton:hover { opacity:.6; }';
-		document.getElementsByTagName('head')[0].appendChild(style);
-	}
 
 	function getRemoveTrigger(postElem) {
 		var removeTrigger = postElem.querySelector('.dismiss-menu-choice');
@@ -54,7 +25,7 @@ function RemoveFeedFromYouTube() {
 	
 	function removePost(postElem) {
 		var removeTrigger = getRemoveTrigger(postElem);
-		simulateClick(removeTrigger);
+		click(removeTrigger);
 		postElem.remove();
 		triggerAutoLoad();
 	}
@@ -136,7 +107,6 @@ function RemoveFeedFromYouTube() {
 */
 	
 	function init() {
-		injectStyle();
 		injectButtonsIntoPosts();
 		listenForNewVideos();
 		console.log('Remove from feed for YouTube successfully initialized');
