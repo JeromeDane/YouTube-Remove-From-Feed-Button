@@ -7,6 +7,7 @@
  * watch-chrome		Create a full build for Chrome and automatically update it when files change
  */
 
+var closureCompiler = require('gulp-closure-compiler');
 var fs = require("fs");
 var gulp = require('gulp');
 var gutil = require("gulp-util");
@@ -15,6 +16,8 @@ var template = require('gulp-template');
 var watch = require('gulp-watch');
 var webpack = require("webpack");
 var zip = require('gulp-zip');
+var ignore = require('gulp-ignore');
+var rimraf = require('gulp-rimraf');
 
 function getPackageDetails() {
 	return JSON.parse(fs.readFileSync("./package.json", "utf8"));
@@ -27,10 +30,30 @@ gulp.task('default', ['dist-chrome'], function(callback) {
 
 // publish distribution for Chrome
 gulp.task('dist-chrome', ['build-chrome'], function(callback) {
+	
+	// copy files to temporary directory
+	gulp.src('./build/chrome/*.*').pipe(gulp.dest('./build/chrome/temp'));
+	
+	// copy images to temporary directory
+	gulp.src('./build/chrome/images/icon_*.*').pipe(gulp.dest('./build/chrome/temp/images'));
+	
+	// minify userscript
+	gulp.src('build/chrome/*.js')
+		.pipe(closureCompiler({
+		  compilerPath: './node_modules/google-closure-compiler/compiler.jar',
+		  fileName: 'build/chrome/temp/userscript.user.js'
+		}));
+	
 	// compress chrome build into a distribution zip
-	return gulp.src('build/chrome/*')
+	gulp.src('build/chrome/temp/*')
         .pipe(zip('chrome-extension-v' + getPackageDetails().version + '.zip'))
         .pipe(gulp.dest('dist'));
+
+	gulp.src('./**/*.js', { read: false }) // much faster 
+		.pipe(ignore('build/chrome/temp/**'))
+		.pipe(rimraf());
+	
+	callback();
 });
 
 
