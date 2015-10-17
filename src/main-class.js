@@ -93,6 +93,21 @@ function RemoveFeedFromYouTube() {
 		
 	}
 
+	function injectRemoveWatchedButton() {
+		// create remove all watched button
+		var button = document.createElement('a');
+		button.id = "bcRemoveAll";
+		button.className = "yt-uix-button feed-header-message secondary-nav yt-uix-sessionlink yt-uix-button-epic-nav-item yt-uix-button-size-default";
+		button.innerHTML = '<span class="yt-uix-button-content">Remove All Watched</span>';
+		
+		// insert remove watched button next to manage subscriptions button
+		var target = document.querySelector('.feed-header .feed-manage-link');
+		target.parentNode.insertBefore(button, target.nextSibling);
+		
+		console.log('remove button injected');
+		
+	}
+
 /*
 	// remove all watched button
 	$('.feed-header .feed-manage-link').after('<a id="bcRemoveAll" class="yt-uix-button  feed-manage-link secondary-nav yt-uix-sessionlink yt-uix-button-epic-nav-item">Remove All Watched</a>');
@@ -109,6 +124,7 @@ function RemoveFeedFromYouTube() {
 	function init() {
 		injectButtonsIntoPosts();
 		listenForNewVideos();
+		injectRemoveWatchedButton();
 		console.log('Remove from feed for YouTube successfully initialized');
 	}
 	

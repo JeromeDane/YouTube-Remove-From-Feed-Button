@@ -15,3 +15,10 @@
 .feed-item-container:hover .bcRemoveButton { display:block; }
 
 .bcRemoveButton:hover { opacity:.6; }
+
+#bcRemoveAll {
+	margin-right: 1em;
+}
+#bcRemoveAll:hover {
+	text-decoration: underline;
+}
