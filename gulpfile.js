@@ -141,5 +141,9 @@ gulp.task('watch-chrome', ['build-chrome'], function(callback) {
 		console.log('change detected', file.relative);
 		io.emit('file.change', {});
 	});
+	watch('./build/chrome/**/*.json', function(file) {
+		console.log('change detected', file.relative);
+		io.emit('file.change', {});
+	});
 	
 });
