@@ -1,7 +1,7 @@
 {
   "name": "remove-from-feed-button-for-youtube",
   "fullName": "Remove from Feed Button for YouTube",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Easily remove items from your YouTube subscription feed with a single click",
   "main": "index.js",
   "scripts": {
