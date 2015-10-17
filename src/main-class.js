@@ -93,12 +93,26 @@ function RemoveFeedFromYouTube() {
 		
 	}
 
+	function removeAllWatched() {
+		var videoElements = document.querySelectorAll(feedItemSelector);
+		for(var i = 0; i < videoElements.length; i++) {
+			var videoElement = videoElements[i];
+			var watched = videoElement.querySelector('.watched-badge');
+			if(watched) {
+				removePost(videoElement);
+			}
+			injectButton(videoElements[i]);
+		}
+	}
+
 	function injectRemoveWatchedButton() {
 		// create remove all watched button
 		var button = document.createElement('a');
 		button.id = "bcRemoveAll";
 		button.className = "yt-uix-button feed-header-message secondary-nav yt-uix-sessionlink yt-uix-button-epic-nav-item yt-uix-button-size-default";
 		button.innerHTML = '<span class="yt-uix-button-content">Remove All Watched</span>';
+		
+		button.onclick = removeAllWatched;
 		
 		// insert remove watched button next to manage subscriptions button
 		var target = document.querySelector('.feed-header .feed-manage-link');
