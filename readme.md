@@ -1,5 +1,4 @@
-Remove from Feed Button for YouTube
-=====================
+# Remove from Feed Button for YouTube
 
 This simple extension injects mute buttons into posts on Google+ (Google Plus) so 
 you can easily mute posts with a single click.
@@ -16,10 +15,22 @@ For updates on this and other projects, follow me on one of the following sites:
 [Facebook](https://www.facebook.com/Dane.Jerome) |
 [Twitter](https://twitter.com/JeromeDane)
 
-Note: The round "Delete" icon in this extension's icon is by [Black Bear Blanc](http://icondatabase.net/icons/black-bear-blanc/dark-buttons-2/dark-buttons-2-deviceaccessvolumemuted-icon). 
+Note: The round "Delete" icon in this extension's icon is by Black Bear Blanc.
 
-License 
-==========
+## Hack This Code
+
+#. Clone this repository to your local machine
+#. Make sure you have [NodeJS](https://nodejs.org) installed
+#. Navigate to the root of this project on your local machine in your command line interface
+#. Run `npm install` to install all required dependencies
+#. Make desired changes to files in `src/`
+#. Build the source code as described below
+
+### Building Source Code
+
+... coming soon ...
+
+## License 
 
 [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by-nc-sa/3.0/)
 
