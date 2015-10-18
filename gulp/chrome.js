@@ -4,18 +4,41 @@ var getPackageDetails = require('./package-details');
 var template = require('gulp-template');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
+var rename = require("gulp-rename");
+var zip = require('gulp-zip');
 
+// web socket port for chrome auto-reload extension (https://github.com/JeromeDane/chrome-extension-auto-reload)
+var WEB_SOCKET_PORT = 8890;
+
+// generate a zip file for the chrome extension
+gulp.task('chrome', ['chrome-build'], function () {
+	return gulp.src('build/chrome/**')
+			.pipe(zip('chrome-extension-v' + getPackageDetails().version + '.zip'))
+			.pipe(gulp.dest('dist/chrome'));
+});
 
 // build the chrome extension
-gulp.task('chrome-build', ['script', 'chrome-manifest', 'chrome-images'], function () {
+gulp.task('chrome-build', ['script', 'chrome-manifest', 'chrome-options', 'chrome-images', 'chrome-script'], function (callback) {
+	callback();
+});
 
-
-
+// copy userscript to chrome build directory
+gulp.task('chrome-script', ['script'], function () {
+	return gulp.src('dist/userscript/userscript.user.min.js')
+			.pipe(rename('userscript.user.js'))
+			.pipe(gulp.dest('build/chrome'));
 });
 
 // generate the chrome manifest from the template
 gulp.task('chrome-manifest', function () {
 	return gulp.src('src/chrome/manifest.json')
+			.pipe(template(getPackageDetails()))
+			.pipe(gulp.dest('build/chrome'));
+});
+
+// generate the chrome manifest from the template
+gulp.task('chrome-options', function () {
+	return gulp.src('src/chrome/options.html')
 			.pipe(template(getPackageDetails()))
 			.pipe(gulp.dest('build/chrome'));
 });
@@ -31,71 +54,29 @@ gulp.task('chrome-images', function () {
 			.pipe(gulp.dest("build/chrome/images"));
 });
 
-// pre-copy and minify chrome distribution files before zipping them
-gulp.task('dist-chrome-pre', ['build-chrome'], function (callback) {
-
-	// copy files to temporary directory
-	gulp.src('./build/chrome/**').pipe(gulp.dest('./build/chrome/temp'));
-
-	// copy images to temporary directory
-	//gulp.src('./build/chrome/images/icon_*.*').pipe(gulp.dest('./build/chrome/temp/images'));
-
-	callback();
-
+// listen for changes to manifest
+gulp.task('chrome-watch-manifest', function() {
+	gulp.watch('src/chrome/manifest.json', ['chrome-manifest']);
 });
 
-// publish distribution for Chrome
-gulp.task('dist-chrome', ['build-chrome'], function (callback) {
-
-
-	// copy files to temporary directory
-	console.log('Copying chrome build to temporary ...');
-	gulp.src('./build/chrome/**').pipe(gulp.dest('./build/chrome/temp'));
-
-	// copy images to temporary directory
-	//gulp.src('./build/chrome/images/icon_*.*').pipe(gulp.dest('./build/chrome/temp/images'));
-
-	console.log('zipping chrome files');
-	// compress chrome build into a distribution zip
-	gulp.src('build/chrome/temp/**')
-			.pipe(zip('chrome-extension-v' + getPackageDetails().version + '.zip'))
-			.pipe(gulp.dest('dist'));
-
-	del('build/chrome/temp');
-
-	callback();
+// listen for changes to options
+gulp.task('chrome-watch-options', function() {
+	gulp.watch('src/chrome/options.html', ['chrome-options']);
 });
 
-// build the full chrome distribution
-gulp.task('build-chrome', ['script-build', 'chrome-images'], function (callback) {
-
-	// generate chrome manifest
-	gulp.src('./src/chrome/manifest.json')
-			.pipe(template(getPackageDetails()))
-			.pipe(gulp.dest('./build/chrome'));
-
-	// generate chrome options page
-	gulp.src('./src/chrome/options.html')
-			.pipe(template(getPackageDetails()))
-			.pipe(gulp.dest('./build/chrome'));
-
+// listen for changes to options
+gulp.task('chrome-watch-script', function() {
+		gulp.watch('src/userscript/*.*', ['chrome-script']);
 });
 
 // Create a full build for Chrome and automatically update it when files change
-gulp.task('watch-chrome', ['build-chrome'], function (callback) {
-	gulp.watch('src/**/*.*', ['build-chrome']);
-
-	var WEB_SOCKET_PORT = 8890;
+gulp.task('chrome-watch', ['chrome-build', 'chrome-watch-manifest', 'chrome-watch-options'], function (callback) {
+	gulp.watch('src/**/*.*', ['chrome-manifest', 'chrome-script', 'chrome-options']);
 
 	io = io.listen(WEB_SOCKET_PORT);
-
-	watch('./build/chrome/**/*.js', function (file) {
+	watch('./build/chrome/**', function (file) {
 		console.log('change detected', file.relative);
 		io.emit('file.change', {});
 	});
-	watch('./build/chrome/**/*.json', function (file) {
-		console.log('change detected', file.relative);
-		io.emit('file.change', {});
-	});
-
 });
+

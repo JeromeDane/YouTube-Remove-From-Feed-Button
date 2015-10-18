@@ -16,7 +16,6 @@ var rename = require("gulp-rename");
 var template = require('gulp-template');
 var watch = require('gulp-watch');
 var webpack = require('webpack-stream');
-var zip = require('gulp-zip');
 var ignore = require('gulp-ignore');
 var getPackageDetails = require('./package-details');
 
