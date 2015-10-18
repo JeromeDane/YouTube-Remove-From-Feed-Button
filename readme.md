@@ -16,6 +16,8 @@ For updates on this and other projects, follow me on one of the following sites:
 
 Note: The round "Delete" icon in this extension's icon is by Black Bear Blanc.
 
+## 
+
 ## Hack This Code
 
 1. Clone this repository to your local machine
@@ -24,6 +26,8 @@ Note: The round "Delete" icon in this extension's icon is by Black Bear Blanc.
 4. Run `npm install` to install all required dependencies
 5. Make desired changes to files in `src/`
 6. Build the source code as described below
+
+If you make useful changes, please create a pull request so I can get them merged back into the master branch and official distribution channels for this project.
 
 ### Building Source Code
 
@@ -41,13 +45,13 @@ You can watch the source code for changes and automatically re-build the related
 * `gulp script-watch` - Watch for changes in the `src/` folder, and automatically update `build/userscript/`
 * `gulp chrome-watch` - Watch for changes in the `src/` folder, and automatically update `build/chrome/`
 
-### Auto Reload Chrome Extension
-
-Using `gulp chrome-watch` with [Chrome Extension Auto Reload](https://github.com/JeromeDane/chrome-extension-auto-reload) installed and running allows you to load this project as an unpacked extension from `build/chrome` and have it automatically reload any time the files in `src/` are changed. This saves you having to go to the Chrome extensions tab and hit reload every time you make any changes.
-
 #### Troubleshooting
 
 If you get an error about `gulp` not being in your path when you run the commands above, you can try installing `gulp` globally on your machine by typing `npm install -g gulp`. If you still have problems (especially on windows machines), you may need to add the path to the gulp binary to your system path. Google will tell you how. ;-)
+
+### Auto Reload Chrome Extension
+
+Using `gulp chrome-watch` with [Chrome Extension Auto Reload](https://github.com/JeromeDane/chrome-extension-auto-reload) installed and running allows you to load this project as an unpacked extension from `build/chrome` and have it automatically reload any time the files in `src/` are changed. This saves you having to go to the Chrome extensions tab and hit reload every time you make any changes.
 
 ## License 
 
