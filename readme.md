@@ -1,7 +1,6 @@
 # Remove from Feed Button for YouTube
 
-This simple extension injects mute buttons into posts on Google+ (Google Plus) so 
-you can easily mute posts with a single click.
+Easily remove videos from your YouTube subscription feed. Ads a (x) button to the right of each video so you can remove them with a single click. Ads a "Remove all watched" button to the top of your subscriptions feed to remove all videos marked as watched with a single click.
 
 ![screen shot](https://github.com/JeromeDane/YouTube-Remove-From-Feed-Button/blob/master/screenshots/screenshot-640x400.png?raw=true)
 
