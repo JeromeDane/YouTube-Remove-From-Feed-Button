@@ -1,4 +1,4 @@
-require('./gulp/userscript');
+require('./gulp/script');
 require('./gulp/chrome');
 var gulp = require('gulp');
 var del = require('del');

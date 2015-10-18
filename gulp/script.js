@@ -10,7 +10,6 @@
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var del = require('del');
-var fs = require("fs");
 var gulp = require('gulp');
 var io = require('socket.io');
 var rename = require("gulp-rename");
@@ -19,11 +18,7 @@ var watch = require('gulp-watch');
 var webpack = require('webpack-stream');
 var zip = require('gulp-zip');
 var ignore = require('gulp-ignore');
-var rimraf = require('gulp-rimraf');
-
-function getPackageDetails() {
-	return JSON.parse(fs.readFileSync("./package.json", "utf8"));
-}
+var getPackageDetails = require('./package-details');
 
 // default gulp task
 gulp.task('default', ['chrome'], function(callback) {
