@@ -71,3 +71,14 @@ gulp.task('script-merge-min', ['script-min', 'script-header'], function(callback
 			.pipe(concat('userscript.user.min.js'))
 			.pipe(gulp.dest("./dist/userscript"));
 });
+
+// Automatically update dist/userscript/userscript.user.js when changes are made to files in src/
+gulp.task('script-watch', ['script'], function (callback) {
+	gulp.watch('src/**/*.*', ['script-build']);
+
+	io = io.listen(WEB_SOCKET_PORT);
+	watch('./build/chrome/**', function (file) {
+		console.log('change detected', file.relative);
+		io.emit('file.change', {});
+	});
+});

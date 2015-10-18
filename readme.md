@@ -32,14 +32,22 @@ The following gulp build tasks can be used by running them on in your command li
 * `gulp script` - Compile a userscript version of this code to `dist/userscript`
 * `gulp chrome-build` - Create `build/chrome` directory and files which can be loaded as an unpacked extension
 * `gulp chrome` - Same as `chrome-build`, plus create a zip file in `dist/chrome/chrome-extensionv[version].zip`
+* `gulp clean` - Removes `dist/` and `build/` folders, along with their contents
 
-### Watching for Changes in Source Code
+#### Watching for Changes in Source Code
 
-... coming soon ...
+You can watch the source code for changes and automatically re-build the related files by starting the following gulp tasks:
+
+* `gulp script-watch` - Watch for changes in the `src/` folder, and automatically update `build/userscript/`
+* `gulp chrome-watch` - Watch for changes in the `src/` folder, and automatically update `build/chrome/`
+
+### Auto Reload Chrome Extension
+
+Using `gulp chrome-watch` with [Chrome Extension Auto Reload](https://github.com/JeromeDane/chrome-extension-auto-reload) installed and running allows you to load this project as an unpacked extension from `build/chrome` and have it automatically reload any time the files in `src/` are changed. This saves you having to go to the Chrome extensions tab and hit reload every time you make any changes.
 
 #### Troubleshooting
 
-If you get an error about `gulp` not being in your path when you run the commands below, you can try installing `gulp` globally on your machine by typing `npm install -g gulp`. If you still have problems (especially on windows machines), you may need to add the path to the gulp binary to your system path. Google will tell you how. ;-)
+If you get an error about `gulp` not being in your path when you run the commands above, you can try installing `gulp` globally on your machine by typing `npm install -g gulp`. If you still have problems (especially on windows machines), you may need to add the path to the gulp binary to your system path. Google will tell you how. ;-)
 
 ## License 
 
