@@ -26,8 +26,8 @@ function getPackageDetails() {
 }
 
 // default gulp task
-gulp.task('default', ['dist-chrome'], function(callback) {
-	del("./build/userscript/userscript.body.js");
+gulp.task('default', ['chrome'], function(callback) {
+	del("./build/userscript/userscript.code.js");
 	del("./build/userscript/userscript.head.js");
 	del("./build/userscript/userscript.min.js");
 });
@@ -46,7 +46,7 @@ gulp.task('script', ['script-merge-min'], function() {
 
 // generate the script header required for userscript parsers like Greasemonkey
 gulp.task('script-header', function() {
-	return gulp.src('./src/userscript/userscript.head.js')
+	return gulp.src('./src/userscript.head.js')
 			.pipe(template(getPackageDetails()))
 			.pipe(gulp.dest('./build/userscript'));
 });
@@ -63,7 +63,7 @@ gulp.task('script-min', ['script-merge'], function(callback) {
 // pack the script
 gulp.task('script-webpack', function(callback) {
 	// pack userscript
-	return gulp.src("./src/userscript.body.*")
+	return gulp.src("./src/userscript.code.*")
 			.pipe(webpack({
 				module: {
 					loaders: [
@@ -73,13 +73,13 @@ gulp.task('script-webpack', function(callback) {
 				},
 				devtool: 'inline-source-map'
 			}))
-			.pipe(rename("userscript.body.js"))
+			.pipe(rename("userscript.code.js"))
 			.pipe(gulp.dest('./build/userscript'));
 });
 
 // merge the script's head and packed body
 gulp.task('script-merge', ['script-webpack', 'script-header'], function(callback) {
-	return gulp.src(["./build/userscript/userscript.head.js", "./build/userscript/userscript.body.js"])
+	return gulp.src(["./build/userscript/userscript.head.js", "./build/userscript/userscript.code.js"])
 			.pipe(concat('userscript.user.js'))
 			.pipe(gulp.dest("./dist/userscript"));
 });
@@ -92,8 +92,9 @@ gulp.task('script-merge-min', ['script-min', 'script-header'], function(callback
 			.pipe(gulp.dest("./dist/userscript"));
 });
 
-gulp.task('script-build', ['script-merge'], function(callback) {
-	callback();
+// build the chrome extension
+gulp.task('chrome-build', ['script'], function() {
+	
 });
 
 gulp.task('chrome-images', function() {

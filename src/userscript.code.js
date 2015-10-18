@@ -1,3 +1,5 @@
+require('./userscript.style.css');
+
 var click = require('simulate-click-js');
 
 function RemoveFeedFromYouTube() {
@@ -148,3 +150,5 @@ function RemoveFeedFromYouTube() {
 }
 
 module.exports = RemoveFeedFromYouTube;
+
+(new RemoveFeedFromYouTube).init();
