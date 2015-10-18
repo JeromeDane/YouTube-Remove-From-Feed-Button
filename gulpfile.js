@@ -12,7 +12,6 @@ var uglify = require('gulp-uglify');
 var del = require('del');
 var fs = require("fs");
 var gulp = require('gulp');
-var gutil = require("gulp-util");
 var io = require('socket.io');
 var rename = require("gulp-rename");
 var template = require('gulp-template');
