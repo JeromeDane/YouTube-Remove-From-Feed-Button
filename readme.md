@@ -28,7 +28,13 @@ Note: The round "Delete" icon in this extension's icon is by Black Bear Blanc.
 
 ### Building Source Code
 
-... coming soon ...
+This project is designed to be build with `gulp`, which is included in the development dependencies. If you get an error about `gulp` not being in your path when you run the commands below, you can try installing `gulp` globally on your machine by typing `npm install -g gulp`. If you still have problems (especially on windows machines), you may need to add the path to the gulp binary to your system path. Google will tell you how. ;-)
+
+The following gulp build tasks can be used by running them on in your command line interface:
+
+* `gulp script` - Compile a userscript version of this code to `dist/userscript`
+* `gulp chrome-build` - Create `build/chrome` directory and files which can be loaded as an unpacked extension
+* `gulp chrome` - Same as `chrome-build`, plus create a zip file in `dist/chrome/chrome-extensionv[version].zip`
 
 ## License 
 
