@@ -19,15 +19,6 @@ var webpack = require('webpack-stream');
 var ignore = require('gulp-ignore');
 var getPackageDetails = require('./package-details');
 
-// default gulp task
-gulp.task('default', ['chrome'], function(callback) {
-	del("./build/userscript/userscript.code.js");
-	del("./build/userscript/userscript.head.js");
-	del("./build/userscript/userscript.min.js");
-});
-
-
-
 // create a minified userscript for final distribution
 gulp.task('script', ['script-merge-min'], function() {
 	del("build/userscript");
