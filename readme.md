@@ -19,7 +19,7 @@ Note: The round "Delete" icon in this extension's icon is by Black Bear Blanc.
 There are several options for using this project:
 
 * Install as a [browser extension for Chrome](https://chrome.google.com/webstore/detail/remove-from-feed-button-f/ogclfblkiagkkfpdbbbphchgfkieecml)
-* Install as a [user script](https://greasyfork.org/en/scripts/13182-remove-from-feed-button-for-youtube) ([mirror](https://openuserjs.org/scripts/JeromeD/Remove_from_Feed_Button_for_YouTube)) using something like [Greasemonkey](https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/), [Tampermonkey]() or [Script Manager](https://chrome.google.com/webstore/detail/blank-canvas-script-handl/pipnnjjknlabchljabhmnpdfpdobpnkkhttps://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+* Install as a [user script](https://greasyfork.org/en/scripts/13182-remove-from-feed-button-for-youtube) ([mirror](https://openuserjs.org/scripts/JeromeD/Remove_from_Feed_Button_for_YouTube)) using something like [Greasemonkey](https://addons.mozilla.org/en-us/firefox/addon/greasemonkey/) or [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?)
 
 ## Hack This Code
 
