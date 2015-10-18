@@ -32,6 +32,13 @@ gulp.task('default', ['dist-chrome'], function(callback) {
 	del("./build/userscript/userscript.min.js");
 });
 
+// remove all build and distribution files
+gulp.task('clean', function(callback) {
+	del('build');
+	del('dist');
+	callback();
+});
+
 // create a minified userscript for final distribution
 gulp.task('script', ['script-merge-min'], function() {
 	del("build/userscript");
@@ -87,12 +94,6 @@ gulp.task('script-build', ['script-merge'], function(callback) {
 gulp.task('chrome-images', function() {
 	return gulp.src('./build/chrome/images/icon_*.*')
 			.pipe(gulp.dest('./build/chrome/temp/images'));
-});
-
-gulp.task('clean', function(callback) {
-	del('build');
-	del('dist');
-	callback();
 });
 
 // pre-copy and minify chrome distribution files before zipping them
