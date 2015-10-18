@@ -63,7 +63,7 @@ gulp.task('script-min', ['script-merge'], function(callback) {
 // pack the script
 gulp.task('script-webpack', function(callback) {
 	// pack userscript
-	return gulp.src("./src/userscript.user.*")
+	return gulp.src("./src/userscript.body.*")
 			.pipe(webpack({
 				module: {
 					loaders: [
