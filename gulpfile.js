@@ -9,7 +9,6 @@
 
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var closureCompiler = require('gulp-closure-compiler');
 var del = require('del');
 var fs = require("fs");
 var gulp = require('gulp');
@@ -47,27 +46,10 @@ gulp.task('script-header', function() {
 
 gulp.task('script-min', ['script-merge'], function(callback) {
 	console.log("Minifying userscript ...");
-	/*
-	return gulp.src('dist/userscript/userscript.min.js')
-		.pipe(uglify())
-		.pipe(gulp.dest("./dist/userscript"));
-	*/
-	
-	
 	return gulp.src('dist/userscript/userscript.user.js')
 		.pipe(uglify())
 		.pipe(rename("userscript.min.js"))
 		.pipe(gulp.dest("./build/userscript"));
-/*
-			.pipe(closureCompiler({
-		  compilerPath: './node_modules/google-closure-compiler/compiler.jar',
-		  fileName: 'build/userscript/userscript.min.js',
-		  //continueWithWarnings: true
-		}), function() {
-			console.log("ERRORS =========");
-			callback();
-		});
-	*/
 });
 
 gulp.task('script-webpack', function(callback) {
@@ -123,13 +105,6 @@ gulp.task('dist-chrome-pre', ['build-chrome'], function(callback) {
 	// copy images to temporary directory
 	//gulp.src('./build/chrome/images/icon_*.*').pipe(gulp.dest('./build/chrome/temp/images'));
 	
-	// minify userscript
-	gulp.src('build/chrome/*.js')
-		.pipe(closureCompiler({
-		  compilerPath: './node_modules/google-closure-compiler/compiler.jar',
-		  fileName: 'build/chrome/temp/userscript.user.js'
-		}));
-	
 	callback();
 	
 });
@@ -144,13 +119,6 @@ gulp.task('dist-chrome', ['build-chrome'], function(callback) {
 	
 	// copy images to temporary directory
 	//gulp.src('./build/chrome/images/icon_*.*').pipe(gulp.dest('./build/chrome/temp/images'));
-	
-	// minify userscript
-	gulp.src('build/chrome/*.js')
-		.pipe(closureCompiler({
-		  compilerPath: './node_modules/google-closure-compiler/compiler.jar',
-		  fileName: 'build/chrome/temp/userscript.user.js'
-		}));
 	
 	console.log('zipping chrome files');
 	// compress chrome build into a distribution zip
