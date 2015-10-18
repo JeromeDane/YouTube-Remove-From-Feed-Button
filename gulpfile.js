@@ -35,7 +35,7 @@ gulp.task('default', ['dist-chrome'], function(callback) {
 });
 
 // create a minified userscript for final distribution
-gulp.task('userscript', ['script-merge-min'], function() {
+gulp.task('script', ['script-merge-min'], function() {
 	del("build/userscript");
 });
 
