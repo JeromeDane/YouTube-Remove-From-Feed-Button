@@ -1,9 +1,13 @@
 var gulp = require('gulp');
 var del = require('del');
+var getPackageDetails = require('./package-details');
+var template = require('gulp-template');
 
 // build the chrome extension
 gulp.task('chrome-build', ['script'], function() {
-	
+	var manifest = gulp.src('src/chrome/manifest.json')
+			.pipe(template(getPackageDetails()))
+			.pipe(gulp.dest('build/chrome'));
 });
 
 gulp.task('chrome-images', function() {
