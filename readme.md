@@ -4,8 +4,6 @@ Easily remove videos from your YouTube subscription feed. Ads a (x) button to th
 
 ![screen shot](https://github.com/JeromeDane/YouTube-Remove-From-Feed-Button/blob/master/screenshots/screenshot-640x400.png?raw=true)
 
-[Install for Chrome](https://chrome.google.com/webstore/detail/remove-from-feed-for-yout/ogclfblkiagkkfpdbbbphchgfkieecml)
-
 If you like this extension, you can always **[buy me a cup of coffee](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KF2QJ87Q37PFJ)**.
 
 For updates on this and other projects, follow me on one of the following sites:
