@@ -19,12 +19,12 @@ Note: The round "Delete" icon in this extension's icon is by Black Bear Blanc.
 
 ## Hack This Code
 
-#. Clone this repository to your local machine
-#. Make sure you have [NodeJS](https://nodejs.org) installed
-#. Navigate to the root of this project on your local machine in your command line interface
-#. Run `npm install` to install all required dependencies
-#. Make desired changes to files in `src/`
-#. Build the source code as described below
+1. Clone this repository to your local machine
+2. Make sure you have [NodeJS](https://nodejs.org) installed
+3. Navigate to the root of this project on your local machine in your command line interface
+4. Run `npm install` to install all required dependencies
+5. Make desired changes to files in `src/`
+6. Build the source code as described below
 
 ### Building Source Code
 
