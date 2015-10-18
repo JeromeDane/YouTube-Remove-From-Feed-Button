@@ -3,6 +3,7 @@
 // @description		<%= description %>
 // @version			<%= version %>
 // @author			<%= author %>
+// @namespace		http://jeromedane.com/remove-from-feed-for-youtube
 // @include			http://www.youtube.com/feed/subscriptions*
 // @include			https://www.youtube.com/feed/subscriptions*
 // 
