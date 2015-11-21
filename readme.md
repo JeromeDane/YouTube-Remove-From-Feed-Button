@@ -1,10 +1,6 @@
-## STATUS: Temporarily Borked
-
-**YouTube recently updated the layout of their subscriptions page, so the code needs to be updated to take the new DOM into account. Will fix soon. Issue created at https://github.com/JeromeDane/YouTube-Remove-From-Feed-Button/issues/8**
-
 # Remove from Feed Button for YouTube
 
-Easily remove videos from your YouTube subscription feed. Ads a (x) button to the right of each video so you can remove them with a single click. Ads a "Remove all watched" button to the top of your subscriptions feed to remove all videos marked as watched with a single click.
+Easily remove videos from your YouTube subscription feed. Ads a (x) button to the right of each video so you can remove them with a single click.
 
 ![screen shot](https://github.com/JeromeDane/YouTube-Remove-From-Feed-Button/blob/master/screenshots/screenshot-640x400.png?raw=true)
 
