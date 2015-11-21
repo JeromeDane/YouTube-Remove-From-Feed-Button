@@ -9,6 +9,16 @@ function RemoveFeedFromYouTube() {
 	var feedItemContainerClass = 'feed-item-container';
 	var feedWrapperSelector = '#browse-items-primary > ol';
 	var feedItemSelector = feedWrapperSelector + ' .' + feedItemContainerClass;
+	var gridItemContainer = 'yt-shelf-grid-item';
+	var gridItemSelector = feedWrapperSelector + ' .' + gridItemContainer;
+
+	function getVideoItemSelector() {
+		var gridItems = document.body.querySelectorAll(gridItemSelector);
+		if(gridItems && gridItems.length > 0) {
+				return gridItemSelector;
+		}
+		return feedItemSelector;
+	}
 
 	function getRemoveTrigger(postElem) {
 		var removeTrigger = postElem.querySelector('.dismiss-menu-choice');
@@ -45,16 +55,12 @@ function RemoveFeedFromYouTube() {
 	// inject a remove button into a post
 	function injectButton(postElem) {
 		if(!postElem.className.match(/buttonEnabled/)) {
-
-			postElem.style.border = '2px solid red';
-			return;
-
 			postElem.className += ' buttonEnabled';
 			var removeTrigger = getRemoveTrigger(postElem);
 			if(removeTrigger) {
-				var actionMenuElem = postElem.querySelector('.feed-item-action-menu');
+				//var actionMenuElem = postElem.querySelector('.feed-item-action-menu');
 				var button = createNewButtonElement();
-				actionMenuElem.parentNode.insertBefore(button, actionMenuElem);
+				postElem.appendChild(button);
 				button.onclick = function() {
 					removePost(postElem);
 				};
@@ -64,7 +70,7 @@ function RemoveFeedFromYouTube() {
 
 	// draw mute button for existing posts
 	function injectButtonsIntoPosts() {
-		var videoElements = document.querySelectorAll(feedItemSelector);
+		var videoElements = document.querySelectorAll(getVideoItemSelector());
 		for(var i = 0; i < videoElements.length; i++) {
 			injectButton(videoElements[i]);
 		}
@@ -100,7 +106,7 @@ function RemoveFeedFromYouTube() {
 	}
 
 	function removeAllWatched() {
-		var videoElements = document.querySelectorAll(feedItemSelector);
+		var videoElements = document.querySelectorAll(getVideoItemSelector());
 		for(var i = 0; i < videoElements.length; i++) {
 			var videoElement = videoElements[i];
 			var watched = videoElement.querySelector('.watched-badge');
@@ -124,32 +130,13 @@ function RemoveFeedFromYouTube() {
 		var target = document.querySelector('.feed-header .feed-manage-link');
 		target.parentNode.insertBefore(button, target.nextSibling);
 
-		console.log('remove button injected');
-
-	}
-
-/*
-	// remove all watched button
-	$('.feed-header .feed-manage-link').after('<a id="bcRemoveAll" class="yt-uix-button  feed-manage-link secondary-nav yt-uix-sessionlink yt-uix-button-epic-nav-item">Remove All Watched</a>');
-	$('#bcRemoveAll').click(function() {
-		$(feedItemSelector).each(function() {
-			var postElem = $(this);
-			if($('.feed-thumb-watched', postElem).size() > 0) {
-				removePost(postElem);
-			}
-		});
-	});
-*/
-
-	function init() {
-		injectButtonsIntoPosts();
-		listenForNewVideos();
-		injectRemoveWatchedButton();
-		console.log('Remove from feed for YouTube successfully initialized');
 	}
 
 	return {
-		init: init
+		init: function() {
+			injectButtonsIntoPosts();
+			listenForNewVideos();
+		}
 	};
 }
 

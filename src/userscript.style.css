@@ -1,16 +1,18 @@
+.buttonEnabled{ position: relative; }
 
-// hide removed from feed notices 
-.feed-item-dismissal-notices { display:none; } 
+// hide removed from feed notices
+.feed-item-dismissal-notices { display:none; }
 
 .bcRemoveButton {
 	cursor:pointer;
 	opacity:.45;
-	position:absolute; 
-	top:0; 
-	right:30px; 
-	display:none; 
+	position:absolute;
+	top:50px;
+	right:35px;
+	display:none;
 	padding:3px;
 }
+
 
 .feed-item-container:hover .bcRemoveButton { display:block; }
 
@@ -22,3 +24,12 @@
 #bcRemoveAll:hover {
 	text-decoration: underline;
 }
+
+/* new grid view */
+.yt-shelf-grid-item .bcRemoveButton {
+	top: 1px;
+	right: 1px;
+	background: #000;
+}
+.feed-item-container:hover .yt-shelf-grid-item .bcRemoveButton { display:none; }
+.yt-shelf-grid-item:hover .bcRemoveButton { display:block !important; }
