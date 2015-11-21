@@ -1,32 +1,56 @@
 var gulp = require('gulp');
 var del = require('del');
 var getPackageDetails = require('./package-details');
+var io = require('socket.io');
 var template = require('gulp-template');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var rename = require("gulp-rename");
+var watch = require('gulp-watch');
+var webpack = require('webpack-stream');
 var zip = require('gulp-zip');
 
 // web socket port for chrome auto-reload extension (https://github.com/JeromeDane/chrome-extension-auto-reload)
 var WEB_SOCKET_PORT = 8890;
 
 // generate a zip file for the chrome extension
-gulp.task('chrome', ['chrome-build'], function () {
+gulp.task('chrome:dist', ['chrome:build'], function () {
 	return gulp.src('build/chrome/**')
 			.pipe(zip('chrome-extension-v' + getPackageDetails().version + '.zip'))
 			.pipe(gulp.dest('dist/chrome'));
 });
 
 // build the chrome extension
-gulp.task('chrome-build', ['script', 'chrome-manifest', 'chrome-options', 'chrome-images', 'chrome-script'], function (callback) {
+gulp.task('chrome:build', ['chrome-manifest', 'chrome-options', 'chrome-images', 'chrome-script'], function (callback) {
 	callback();
 });
 
-// copy userscript to chrome build directory
+// Create a full build for Chrome and automatically update it when files change
+gulp.task('chrome:watch', ['chrome:build', 'chrome-watch-manifest', 'chrome-watch-options'], function (callback) {
+	gulp.watch('src/**/*.*', ['chrome-manifest', 'chrome-script', 'chrome-options']);
+
+	io = io.listen(WEB_SOCKET_PORT);
+	watch('./build/chrome/**', function (file) {
+		console.log('change detected', file.relative);
+		io.emit('file.change', {});
+	});
+});
+
+// pack content script for Chrome
 gulp.task('chrome-script', ['script'], function () {
-	return gulp.src('dist/userscript/userscript.user.min.js')
-			.pipe(rename('userscript.user.js'))
-			.pipe(gulp.dest('build/chrome'));
+
+	return gulp.src("./src/userscript.code.*")
+		.pipe(webpack({
+			module: {
+				loaders: [
+					{test: /\.png$/, loader: "url-loader?mimetype=image/png"},
+					{test: /\.css$/, loader: 'style!css' }
+				]
+			},
+			devtool: 'inline-source-map'
+		}))
+		.pipe(rename("content.js"))
+		.pipe(gulp.dest('./build/chrome'));
 });
 
 // generate the chrome manifest from the template
@@ -68,15 +92,3 @@ gulp.task('chrome-watch-options', function() {
 gulp.task('chrome-watch-script', function() {
 		gulp.watch('src/userscript/*.*', ['chrome-script']);
 });
-
-// Create a full build for Chrome and automatically update it when files change
-gulp.task('chrome-watch', ['chrome-build', 'chrome-watch-manifest', 'chrome-watch-options'], function (callback) {
-	gulp.watch('src/**/*.*', ['chrome-manifest', 'chrome-script', 'chrome-options']);
-
-	io = io.listen(WEB_SOCKET_PORT);
-	watch('./build/chrome/**', function (file) {
-		console.log('change detected', file.relative);
-		io.emit('file.change', {});
-	});
-});
-

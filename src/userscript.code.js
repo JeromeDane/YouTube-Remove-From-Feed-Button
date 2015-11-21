@@ -3,7 +3,7 @@ require('./userscript.style.css');
 var click = require('simulate-click-js');
 
 function RemoveFeedFromYouTube() {
-	
+
 	// configuration variables
 	var removeButtonClass = 'bcRemoveButton';
 	var feedItemContainerClass = 'feed-item-container';
@@ -24,7 +24,7 @@ function RemoveFeedFromYouTube() {
 			window.scroll(x,y);
 		},50);
 	}
-	
+
 	function removePost(postElem) {
 		var removeTrigger = getRemoveTrigger(postElem);
 		click(removeTrigger);
@@ -45,6 +45,10 @@ function RemoveFeedFromYouTube() {
 	// inject a remove button into a post
 	function injectButton(postElem) {
 		if(!postElem.className.match(/buttonEnabled/)) {
+
+			postElem.style.border = '2px solid red';
+			return;
+
 			postElem.className += ' buttonEnabled';
 			var removeTrigger = getRemoveTrigger(postElem);
 			if(removeTrigger) {
@@ -69,7 +73,7 @@ function RemoveFeedFromYouTube() {
 
 	// listen for new videos in the DOM and add the remove button as necessary
 	function listenForNewVideos() {
-		
+
 		var target = document.querySelector(feedWrapperSelector);
 
 		// create an observer instance
@@ -86,13 +90,13 @@ function RemoveFeedFromYouTube() {
 				}
 			});
 		});
-		
+
 		// configuration of the observer:
 		var config = { attributes: true, childList: true, characterData: true }
 
 		// pass in the target node, as well as the observer options
 		observer.observe(target, config);
-		
+
 	}
 
 	function removeAllWatched() {
@@ -113,15 +117,15 @@ function RemoveFeedFromYouTube() {
 		button.id = "bcRemoveAll";
 		button.className = "yt-uix-button feed-header-message secondary-nav yt-uix-sessionlink yt-uix-button-epic-nav-item yt-uix-button-size-default";
 		button.innerHTML = '<span class="yt-uix-button-content">Remove All Watched</span>';
-		
+
 		button.onclick = removeAllWatched;
-		
+
 		// insert remove watched button next to manage subscriptions button
 		var target = document.querySelector('.feed-header .feed-manage-link');
 		target.parentNode.insertBefore(button, target.nextSibling);
-		
+
 		console.log('remove button injected');
-		
+
 	}
 
 /*
@@ -136,14 +140,14 @@ function RemoveFeedFromYouTube() {
 		});
 	});
 */
-	
+
 	function init() {
 		injectButtonsIntoPosts();
 		listenForNewVideos();
 		injectRemoveWatchedButton();
 		console.log('Remove from feed for YouTube successfully initialized');
 	}
-	
+
 	return {
 		init: init
 	};

@@ -1,12 +1,3 @@
-/*
- * Gulp tasks:
- * 
- * default			Create full builds and distribution files for all platforms
- * build-chrome		Create a full build for Chrome
- * dist-chrome		Create a full distribution file for Chrome
- * watch-chrome		Create a full build for Chrome and automatically update it when files change
- */
-
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var del = require('del');
@@ -22,6 +13,17 @@ var getPackageDetails = require('./package-details');
 // create a minified userscript for final distribution
 gulp.task('script', ['script-merge-min'], function() {
 	del("build/userscript");
+});
+
+// Automatically update dist/userscript/userscript.user.js when changes are made to files in src/
+gulp.task('script:watch', ['script'], function (callback) {
+	gulp.watch('src/**/*.*', ['script-build']);
+
+	io = io.listen(WEB_SOCKET_PORT);
+	watch('./build/chrome/**', function (file) {
+		console.log('change detected', file.relative);
+		io.emit('file.change', {});
+	});
 });
 
 // generate the script header required for userscript parsers like Greasemonkey
@@ -70,15 +72,4 @@ gulp.task('script-merge-min', ['script-min', 'script-header'], function(callback
 	return gulp.src(["./build/userscript/userscript.head.js", "./build/userscript/userscript.min.js"])
 			.pipe(concat('userscript.user.min.js'))
 			.pipe(gulp.dest("./dist/userscript"));
-});
-
-// Automatically update dist/userscript/userscript.user.js when changes are made to files in src/
-gulp.task('script-watch', ['script'], function (callback) {
-	gulp.watch('src/**/*.*', ['script-build']);
-
-	io = io.listen(WEB_SOCKET_PORT);
-	watch('./build/chrome/**', function (file) {
-		console.log('change detected', file.relative);
-		io.emit('file.change', {});
-	});
 });

@@ -13,7 +13,7 @@
 	"web_accessible_resources":["images/close_16_r8.png"],
 	"content_scripts": [
 		{
-			"js": ["userscript.user.js"],
+			"js": ["content.js"],
 			"matches": ["http://www.youtube.com/*", "https://www.youtube.com/*"],
 			"run_at": "document_end"
 		}
