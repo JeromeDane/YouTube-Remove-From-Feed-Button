@@ -56,6 +56,10 @@ If you get an error about `gulp` not being in your path when you run the command
 
 Using `gulp chrome-watch` with [Chrome Extension Auto Reload](https://github.com/JeromeDane/chrome-extension-auto-reload) installed and running allows you to load this project as an unpacked extension from `build/chrome` and have it automatically reload any time the files in `src/` are changed. This saves you having to go to the Chrome extensions tab and hit reload every time you make any changes.
 
+## Issues
+
+[![Stories in Ready](https://badge.waffle.io/JeromeDane/YouTube-Remove-From-Feed-Button.svg?label=ready&title=Ready)](http://waffle.io/JeromeDane/YouTube-Remove-From-Feed-Button)
+
 ## License
 
 [Creative Commons Attribution 3.0 Unported License](http://creativecommons.org/licenses/by-nc-sa/3.0/)
@@ -65,3 +69,4 @@ You can share or modify this work as long as you:
 1. Link back to this page
 2. Don't use this or derivatives of this for commercial use
 3. Share your changes so that others can benifit from your improvements.
+
